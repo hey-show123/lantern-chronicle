@@ -17,6 +17,18 @@ sys.path.insert(0, HERE)
 from simlib import Sim, load_dictionary, play_battle  # noqa: E402
 
 
+def close_tips(sim):
+    """初めての画面で出る説明（「つぎへ」で進んで「OK」で閉じる）を閉じる。"""
+    for _ in range(5):
+        labs = sim.labels()
+        if not any(("とは？" in l or "ページ" in l) for l in labs):
+            return
+        hit = labs.get("つぎへ") or labs.get("OK")
+        if not hit:
+            return
+        sim.tap_el(hit, wait=True); time.sleep(1.4)
+
+
 def run_steps(sim, steps, dictionary, shot_dir, on_record_mark=None):
     for st in steps:
         if "relaunch" in st: sim.relaunch()
@@ -26,16 +38,22 @@ def run_steps(sim, steps, dictionary, shot_dir, on_record_mark=None):
         elif "tap_if" in st: sim.tap_label(st["tap_if"], tries=2, required=False) and time.sleep(2.2)
         elif "tap" in st: sim.tap_label(st["tap"]); time.sleep(2.2)
         elif "tap_xy" in st: sim.tap_xy(*st["tap_xy"]); time.sleep(1)
+        elif "tap_below" in st:  # 名前の無いボタン（ダイアログの「引く」など）を、近くの文字からの位置で押す
+            tb = st["tap_below"]; hit = next((e for lab, e in sim.labels().items() if tb["label"] in lab), None)
+            if hit:
+                f = hit["frame"]; sim.tap_xy(round(f["x"] + f["width"] / 2 + tb.get("dx", 0)), round(f["y"] + f["height"] + tb.get("dy", 40)))
+            time.sleep(1.5)
         elif "swipe" in st: sim.swipe(*st["swipe"])
         elif "goto_stage" in st:
             for key in st["goto_stage"]:
+                close_tips(sim)
                 sim.tap_label(key); time.sleep(2.6)
-                sim.tap_label("つぎへ", tries=1, required=False)  # 初回の説明が出たら閉じる
+                close_tips(sim)
         elif "shot" in st:
             sim.screenshot(os.path.join(shot_dir, st["shot"] + ".png"))
         elif "battle" in st:
             b = st["battle"]
-            play_battle(sim, dictionary, b.get("seconds", 120), b.get("wrong_every", 0), b.get("shots"), shot_dir)
+            play_battle(sim, dictionary, b.get("seconds", 120), b.get("wrong_every", 0), b.get("shots"), shot_dir, b.get("pace", 0.0))
         elif "_record_from_here" in st:
             if on_record_mark: on_record_mark()
 

@@ -50,9 +50,9 @@
   {
    "slot": "party",
    "file": "img/shots/party.webp",
-   "title": "編成",
+   "title": "キャラ",
    "caption": "仲間を選んで、パーティを作ります。",
-   "alt": "編成画面"
+   "alt": "キャラ（パーティ編成）の画面"
   },
   {
    "slot": "gacha",

@@ -2,7 +2,8 @@
 """tools/cuts.json を読んで、tools/work のクリップから img/promo.mp4 と ポスター画像を作る（ffmpeg が必要）。
 
   python3 tools/build_video.py             # 全部作り直す（tools/work のクリップが要る）
-  python3 tools/build_video.py --end-only  # 最後の案内画面だけ作り直す（いまの promo.mp4 の前半をそのまま使う。撮り直し不要）"""
+  python3 tools/build_video.py --end-only  # 最後の案内画面だけ作り直す（いまの promo.mp4 の前半をそのまま使う。撮り直し不要）
+  python3 tools/build_video.py --title-only  # 最初の場面（タイトル）だけ、撮り直した tools/work/title.mp4 で作り直す（ほかは今の promo.mp4 のまま）"""
 import json, os, subprocess, sys
 from PIL import Image, ImageDraw, ImageFont
 
@@ -74,6 +75,24 @@ def old_head():
     return head
 
 
+def old_tail(after):
+    """いまの promo.mp4 の after 秒目から最後まで。"""
+    tail = os.path.join(WORK, "tail.mp4")
+    run(["-ss", f"{after:.3f}", "-i", OUT, "-an", "-c:v", "libx264", "-crf", "22", "-pix_fmt", "yuv420p", tail])
+    return tail
+
+
+def first_cut():
+    c = cfg["cuts"][0]
+    cap = os.path.join(WORK, "cap0.png"); caption_png(c["caption"], cap)
+    out = os.path.join(WORK, "cut0.mp4"); dur = c["dur"]
+    fc = (f"[0:v]fps=30,scale={W}:{PH}:flags=lanczos,pad={W}:{H}:0:0:color=0x0e1030[b];"
+          f"[b][1:v]overlay=0:0,fade=t=in:st=0:d=0.25,fade=t=out:st={dur - 0.25}:d=0.25[o]")
+    run(["-ss", str(c["start"]), "-t", str(dur), "-i", os.path.join(WORK, c["clip"] + ".mp4"), "-loop", "1", "-i", cap,
+         "-filter_complex", fc, "-map", "[o]", "-t", str(dur), "-an", "-c:v", "libx264", "-crf", "24", "-pix_fmt", "yuv420p", out])
+    return out
+
+
 def concat(parts):
     lst = os.path.join(WORK, "list.txt"); open(lst, "w").write("".join(f"file '{p}'\n" for p in parts))
     tmp = os.path.join(WORK, "promo_new.mp4")
@@ -87,5 +106,7 @@ if __name__ == "__main__":
     os.makedirs(WORK, exist_ok=True)
     if "--end-only" in sys.argv:
         concat([old_head(), make_end()])
+    elif "--title-only" in sys.argv:
+        concat([first_cut(), old_tail(cfg["cuts"][0]["dur"])])
     else:
         concat(make_cuts() + [make_end()])

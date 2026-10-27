@@ -82,7 +82,7 @@ class Sim:
     def go_home(self):
         for _ in range(14):
             labs = self.labels()
-            for k in ("タップしてスタート", "リトライ", "つぎへ", "マップへ", "OK", "閉じる", "戻る"):
+            for k in ("タップしてスタート", "目標は後で決める", "リトライ", "つぎへ", "マップへ", "ホームへ", "OK", "あとで", "閉じる", "戻る"):
                 if k in labs:
                     self.tap_el(labs[k], wait=True)
                     break
@@ -128,10 +128,11 @@ def load_dictionary(app_repo, cache):
     return out
 
 
-def play_battle(sim, dictionary, seconds=120, wrong_every=0, shots=None, shot_dir=None):
+def play_battle(sim, dictionary, seconds=120, wrong_every=0, shots=None, shot_dir=None, pace=0.0):
     """落ちてくる単語を読み、同じレーンの正解ボタンを押す。ゲージが満タンならスキルも押す。
-    shots=[{"t": 秒, "name": 名前}] で、バトル開始から t 秒後に画面を撮る。"""
-    start = time.time(); end = start + seconds; empty = 0; cnt = 0; last_skill = 0
+    shots=[{"t": 秒, "name": 名前}] で、答えのボタンが出てから t 秒後に画面を撮る。
+    pace: 答えと答えのあいだを最低この秒数あける（動画を人が遊んでいる速さに見せる）。"""
+    start = None; end = time.time() + seconds; empty = 0; cnt = 0; last_skill = 0; last_answer = 0
     pending = sorted(shots or [], key=lambda s: s["t"])
     sw, sh = 440, 956  # 画面の大きさ（ポイント）。iPhone でも iPad でも動くように、毎回 Application の枠から読む
     while time.time() < end:
@@ -157,12 +158,16 @@ def play_battle(sim, dictionary, seconds=120, wrong_every=0, shots=None, shot_di
             ja = dictionary.get(w) or dictionary.get(w.rstrip("s")) or []
             cnt += 1
             wrong = wrong_every > 0 and cnt % wrong_every == 0
+            if pace and time.time() - last_answer < pace:
+                continue
             for l, t, e in btns:
                 if l == lane and ((t not in ja) if wrong else (t in ja)):
-                    sim.tap_el(e); break
+                    sim.tap_el(e); last_answer = time.time(); break
         empty = empty + 1 if (not cards and not btns) else 0
-        while pending and time.time() - start >= pending[0]["t"]:
+        if start is None and btns:
+            start = time.time()
+        while pending and start is not None and time.time() - start >= pending[0]["t"]:
             s = pending.pop(0)
             sim.screenshot(os.path.join(shot_dir, s["name"] + ".png"))
-        if empty >= 10:
+        if empty >= 10 and start is not None:
             break
