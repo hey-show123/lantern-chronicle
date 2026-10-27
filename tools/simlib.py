@@ -133,11 +133,15 @@ def play_battle(sim, dictionary, seconds=120, wrong_every=0, shots=None, shot_di
     shots=[{"t": 秒, "name": 名前}] で、バトル開始から t 秒後に画面を撮る。"""
     start = time.time(); end = start + seconds; empty = 0; cnt = 0; last_skill = 0
     pending = sorted(shots or [], key=lambda s: s["t"])
+    sw, sh = 440, 956  # 画面の大きさ（ポイント）。iPhone でも iPad でも動くように、毎回 Application の枠から読む
     while time.time() < end:
         els = sim.elements(); cards = []; btns = []
         for e in els:
+            if e.get("type") == "Application":
+                sw, sh = e["frame"]["width"], e["frame"]["height"]
+        for e in els:
             lab = e.get("AXLabel") or ""; f = e["frame"]
-            if re.fullmatch(r"[A-Za-z' .\-]+", lab) and f["width"] > 100 and f["y"] < 700:
+            if re.fullmatch(r"[A-Za-z' .\-]+", lab) and f["width"] > sw * 0.23 and f["y"] < sh * 0.73:
                 cards.append((lab.lower().strip(), f))
             g = re.search(r"ゲージ (\d+) / 8", lab)
             if g and g.group(1) == "8" and time.time() - last_skill > 3:
@@ -146,7 +150,7 @@ def play_battle(sim, dictionary, seconds=120, wrong_every=0, shots=None, shot_di
             if m:
                 btns.append((m.group(1), m.group(2), e))
         for lane in ("左", "右"):
-            cs = [c for c in cards if (c[1]["x"] < 220) == (lane == "左")]
+            cs = [c for c in cards if (c[1]["x"] < sw / 2) == (lane == "左")]
             if not cs:
                 continue
             w, _ = max(cs, key=lambda c: c[1]["y"])

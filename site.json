@@ -1,0 +1,5 @@
+{
+ "_説明": "ここを1行直すだけで LP に出る。x_handle は @ なしの名前（例: lantern_chronicle）。app_store_url は App Store のページの URL。空のあいだは、そのボタンやリンクを出さない。",
+ "x_handle": "",
+ "app_store_url": ""
+}

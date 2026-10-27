@@ -8,7 +8,7 @@
   python3 tools/capture.py --app-repo ... --build                         # 撮り終わったら build_video.py も実行
 
 動画は tools/build_video.py（cuts.json）で作る。"""
-import argparse, json, os, subprocess, sys, time
+import argparse, json, os, shutil, subprocess, sys, time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
@@ -53,12 +53,14 @@ def main():
     ap.add_argument("--only", choices=["shots", "clips"])
     ap.add_argument("--name")
     ap.add_argument("--build", action="store_true")
-    ap.add_argument("--keep-running", action="store_true", help="終わってもシミュレータを止めない")
+    ap.add_argument("--shutdown", action="store_true", help="終わったらシミュレータを止める（ふだんは止めない。2台とも起動したままにする決まり）")
+    ap.add_argument("--raw", help="写真の元の PNG（等倍）もここに残す（App Store のスクリーンショット用）")
+    ap.add_argument("--udid", help="capture.json の端末の代わりに使う端末（例: iPad）")
     a = ap.parse_args()
     cfg = json.load(open(os.path.join(HERE, "capture.json")))
     os.makedirs(WORK, exist_ok=True)
     os.makedirs(os.path.join(ROOT, "img", "shots"), exist_ok=True)
-    sim = Sim(cfg["udid"], cfg["bundle"])
+    sim = Sim(a.udid or cfg["udid"], cfg["bundle"])
     dictionary = load_dictionary(a.app_repo, os.path.join(WORK, "dict.json"))
     sim.boot()
     try:
@@ -69,7 +71,11 @@ def main():
                 run_steps(sim, sh["steps"], dictionary, WORK)
                 for f in os.listdir(WORK):
                     if f.endswith(".png"):
-                        to_webp(os.path.join(WORK, f), os.path.join(ROOT, "img", "shots", f[:-4] + ".webp"))
+                        if a.raw:
+                            os.makedirs(a.raw, exist_ok=True)
+                            shutil.copy(os.path.join(WORK, f), os.path.join(a.raw, f))
+                        if not a.raw or not a.udid:  # 別の端末（iPad など）の写真は LP の写真を上書きしない
+                            to_webp(os.path.join(WORK, f), os.path.join(ROOT, "img", "shots", f[:-4] + ".webp"))
                         os.remove(os.path.join(WORK, f))
         if a.only in (None, "clips"):
             for cl in cfg["clips"]:
@@ -89,8 +95,8 @@ def main():
                 sim.record_stop()
     finally:
         sim.record_stop()
-        if not a.keep_running:
-            sim.shutdown()  # ディスクと電池のため、使い終わったら止める
+        if a.shutdown:
+            sim.shutdown()
     if a.build:
         subprocess.run([sys.executable, os.path.join(HERE, "build_video.py")], check=True)
 

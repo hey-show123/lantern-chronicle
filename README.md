@@ -30,7 +30,7 @@ python3 tools/capture.py --app-repo /Volumes/HD-ADU3/モチタンクローン --
 2. `tools/capture.json` の手順どおりに画面を動かし、`img/shots/*.webp` を撮る。
 3. 同じく録画のクリップを `tools/work/*.mp4` に撮る（このフォルダは git に入れない）。
 4. `--build` があれば `tools/build_video.py` が `tools/cuts.json` を読み、`img/promo.mp4` とポスター画像を作る。
-5. 終わったらシミュレータを止める。
+5. シミュレータは起動したままにする（2台とも起動したままにする決まり。止めたいときだけ `--shutdown`）。
 
 一部だけ撮り直す:
 
@@ -78,8 +78,14 @@ python3 tools/build_video.py
 - PC の灯台の層（`img/hero/wide/lighthouse.webp`）は、元の絵の光の帯にあったピンク色を金色に直した版。
 - PC では絵を切らずに見せ、キャッチコピーとボタンは絵の下の帯に置く。スマホは絵の下のほうに重ねる。
 
+## X のリンクと App Store のボタン（`site.json`）
+
+- `x_handle` に公式 X の名前（@ なし）を入れると、登録のところとフッターに「公式Xをフォロー」が出る。空のあいだは出ない。
+- `app_store_url` に App Store のページの URL を入れると、いちばん上に「App Store で予約注文」のボタンが出る。
+- 共有したときに出る画像は `img/og.jpg`（1200×630）。
+
 ## 事前登録の受け口
 
 - Supabase の Edge Function `prereg`（コードはアプリのリポジトリ `infra/prereg/`）。
 - 確認メール（二重確認）は、送信の鍵を入れると有効になる（`output/lp/PREREG_BACKEND.md`）。
-- App Store の予約注文ができたら、`app.js` の `APP_STORE_URL` に URL を入れる。ボタンが出る。
+

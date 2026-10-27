@@ -3,13 +3,20 @@
   const TIERS = [1000, 3000, 5000, 10000, 30000];
   const $ = (id) => document.getElementById(id);
 
-  // App Store button: shown only when this URL is set (once the pre-order page exists).
-  const APP_STORE_URL = "";
-  if (APP_STORE_URL) {
-    const a = document.createElement("a");
-    a.className = "btn ghost"; a.href = APP_STORE_URL; a.textContent = "App Store で予約注文";
-    $("appstore").replaceWith(a);
-  }
+  // site.json: the App Store button and the official X links appear only once their values are set
+  fetch("site.json", { cache: "no-cache" }).then((r) => r.json()).then((s) => {
+    if (s.app_store_url) {
+      const a = document.createElement("a");
+      a.className = "btn ghost"; a.href = s.app_store_url; a.textContent = "App Store で予約注文";
+      a.target = "_blank"; a.rel = "noopener";
+      $("appstore").replaceWith(a);
+    }
+    const handle = String(s.x_handle || "").replace(/^@/, "").trim();
+    if (/^[A-Za-z0-9_]{1,15}$/.test(handle)) {
+      document.querySelectorAll("[data-x-link]").forEach((a) => { a.href = "https://x.com/" + handle; });
+      document.querySelectorAll("[data-x]").forEach((el) => { el.hidden = false; });
+    }
+  }).catch(() => {});
 
   function countUp(el, n) {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) { el.textContent = n.toLocaleString("ja-JP"); return; }
