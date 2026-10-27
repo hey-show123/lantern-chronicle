@@ -13,7 +13,13 @@
 
 <main>
 <section class="hero" style="padding:0">
- <picture><source media="(max-width:820px)" srcset="img/hero-sp.webp"><img src="img/hero-wide.webp" alt="ランタンクロニクル。ランタンを掲げる主人公ミナと、仲間たちが夕暮れの空の島を見上げている" width="1600" height="900" fetchpriority="high"></picture>
+ <div class="stage" id="stage" aria-hidden="false">
+  <div class="art" id="art">
+   <picture id="heroPic"><source media="(max-width:820px)" srcset="img/hero-sp.webp"><img src="img/hero-wide.webp" alt="ランタンクロニクル。ランタンを掲げる主人公ミナと、仲間たちが夕暮れの空の島を見上げている" width="1600" height="900" fetchpriority="high"></picture>
+   <div class="lamp" id="lamp"><i class="glow"></i><i class="beam b1"></i><i class="beam b2"></i></div>
+   <canvas id="fx" aria-hidden="true"></canvas>
+  </div>
+ </div>
  <div class="copy">
   <span class="badge">事前登録 受付中！</span>
   <h1 class="sr">ランタンクロニクル 英単語RPG</h1>
@@ -29,6 +35,20 @@
  <div class="bar" role="progressbar" aria-label="次の特典までの進み具合" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="fill"></i></div>
  <p class="next" id="next">特典の達成状況を読み込み中…</p>
 </div></div>
+
+<section id="movie" class="alt"><div class="wrap">
+ <span class="eyebrow">PLAY MOVIE</span><h2>25秒でわかる、ランタンクロニクル</h2>
+ <p class="lead">実際のゲーム画面です。英単語を選ぶだけで、仲間が戦います。</p>
+ <div class="shots movie">
+  <div class="phone reveal r-left"><video id="promo" muted loop playsinline preload="metadata" poster="img/promo-poster.jpg" aria-label="ランタンクロニクルのプレイ映像（約25秒）"><source src="img/promo.mp4" type="video/mp4"></video><button class="vbtn" id="vbtn" type="button" aria-label="再生・停止">▶</button></div>
+  <ul>
+   <li><b>タイトル → ホーム</b><br>仲間たちが迎えてくれる、灯りの世界。</li>
+   <li><b>ことばのバトル</b><br>意味を選ぶたび、コンボがつながって大ダメージ。</li>
+   <li><b>ガチャ</b><br>ランタンのひもを引いて、新しい仲間に出会おう。</li>
+  </ul>
+ </div>
+ <p class="note">※開発中の画面です。実際の画面と異なる場合があります。</p>
+</div></section>
 
 <section id="about"><div class="wrap">
  <span class="eyebrow">HOW TO PLAY</span><h2>覚えるほど、冒険が進む</h2>
@@ -90,7 +110,7 @@
  <p class="note">※開発中の画面です。実際の画面と異なる場合があります。</p>
 </div></section>
 
-<section class="alt" id="rewards"><div class="wrap">
+<section class="alt" id="rewards"><canvas class="fx2" data-fx="calm" aria-hidden="true"></canvas><div class="wrap">
  <span class="eyebrow">PRE-REGISTRATION REWARDS</span><h2>みんなで集めて、みんなにプレゼント</h2>
  <p class="lead">事前登録の人数が増えるほど、特典がふえます。達成した特典は、配信後に<b>登録した全員</b>へ届きます。</p>
  <div class="rewards" id="rewardList">
@@ -103,7 +123,7 @@
  <p class="fine">※特典は配信後、プレゼントボックスに届きます。受け取りはゲームを始めた全員が対象です（事前登録のメールアドレスとの紐づけは不要）。内容は予告なく変更することがあります。</p>
 </div></section>
 
-<section class="reg" id="register"><div class="wrap">
+<section class="reg" id="register"><canvas class="fx2" data-fx="calm" aria-hidden="true"></canvas><div class="wrap">
  <span class="eyebrow">REGISTER</span><h2>事前登録する</h2>
  <p class="lead">メールアドレスを入れるだけ。配信の日に、お知らせのメールをお届けします。</p>
  <div class="card">
@@ -141,5 +161,6 @@
  <p>お問い合わせ：<a href="mailto:hey_show.dev@outlook.jp">hey_show.dev@outlook.jp</a></p>
  <p>© 2026 ランタンクロニクル</p>
  <p style="margin-top:8px">App Store は Apple Inc. のサービスマークです。</p></footer>
+<script src="hero.js"></script>
 <script src="app.js"></script>
 </body></html>

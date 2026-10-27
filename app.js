@@ -11,9 +11,16 @@
     $("appstore").replaceWith(a);
   }
 
+  function countUp(el, n) {
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { el.textContent = n.toLocaleString("ja-JP"); return; }
+    const t0 = performance.now();
+    const step = (t) => { const k = Math.min(1, (t - t0) / 1200); el.textContent = Math.round(n * (1 - Math.pow(1 - k, 3))).toLocaleString("ja-JP"); if (k < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  }
   function paint(n) {
     const small = n < 100; // a tiny honest number looks worse than the plain fact that it has just started
-    $("count").textContent = small ? "受付スタート！" : n.toLocaleString("ja-JP");
+    if (small) $("count").textContent = "受付スタート！";
+    else countUp($("count"), n);
     $("count").nextElementSibling.hidden = small;
     const idx = TIERS.findIndex((t) => n < t);
     // equal-width segments: each reward is one step on the bar
@@ -67,8 +74,23 @@
     btn.disabled = false;
   });
 
+  // reveal variants: groups come in one by one
+  document.querySelectorAll(".steps,.feats,.rewards").forEach((g) => [...g.children].forEach((c, i) => { c.style.setProperty("--d", i * 0.08 + "s"); c.classList.add("reveal", "r-pop"); }));
+  document.querySelectorAll(".shots .phone").forEach((c) => c.classList.add("r-left"));
+  document.querySelectorAll(".story .frame,#about .frame").forEach((c) => c.classList.add("r-pop"));
   if ("IntersectionObserver" in window) {
     const io = new IntersectionObserver((es) => es.forEach((x) => { if (x.isIntersecting) { x.target.classList.add("in"); io.unobserve(x.target); } }), { threshold: 0.12 });
     document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
   } else document.querySelectorAll(".reveal").forEach((el) => el.classList.add("in"));
+
+  // promo video: plays muted while visible, tap toggles; with reduced motion it waits for a tap
+  const vid = document.getElementById("promo"), vbtn = document.getElementById("vbtn");
+  if (vid) {
+    const box = vid.parentElement, still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const sync = () => { box.classList.toggle("paused", vid.paused); vbtn.textContent = vid.paused ? "▶" : "❚❚"; };
+    vid.addEventListener("play", sync); vid.addEventListener("pause", sync); sync();
+    box.addEventListener("click", () => (vid.paused ? vid.play() : vid.pause()));
+    if (!still && "IntersectionObserver" in window)
+      new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? vid.play().catch(() => {}) : vid.pause())), { threshold: 0.5 }).observe(vid);
+  }
 })();
