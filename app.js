@@ -11,11 +11,21 @@
       a.target = "_blank"; a.rel = "noopener";
       $("appstore").replaceWith(a);
     }
-    const handle = String(s.x_handle || "").replace(/^@/, "").trim();
-    if (/^[A-Za-z0-9_]{1,15}$/.test(handle)) {
-      document.querySelectorAll("[data-x-link]").forEach((a) => { a.href = "https://x.com/" + handle; });
-      document.querySelectorAll("[data-x]").forEach((el) => { el.hidden = false; });
-    }
+    // official accounts: each link appears once its account exists (live: true) and the name is valid there
+    const RULES = {
+      x: [/^[A-Za-z0-9_]{1,15}$/, (h) => "https://x.com/" + h],
+      tiktok: [/^[A-Za-z0-9_.]{2,24}$/, (h) => "https://www.tiktok.com/@" + h],
+      instagram: [/^[A-Za-z0-9_.]{1,30}$/, (h) => "https://www.instagram.com/" + h + "/"],
+      youtube: [/^[A-Za-z0-9_.-]{3,30}$/, (h) => "https://www.youtube.com/@" + h],
+    };
+    let any = false;
+    Object.entries(s.sns || {}).forEach(([k, v]) => {
+      const rule = RULES[k], h = String((v && v.handle) || "").replace(/^@/, "").trim();
+      if (!rule || !v || v.live !== true || !rule[0].test(h)) return;
+      document.querySelectorAll(`[data-sns-link="${k}"]`).forEach((a) => { a.href = rule[1](h); a.hidden = false; });
+      any = true;
+    });
+    if (any) document.querySelectorAll("[data-sns]").forEach((el) => { el.hidden = false; });
   }).catch(() => {});
 
   function countUp(el, n) {

@@ -188,5 +188,7 @@ footer nav{display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;margi
 .top.show{opacity:1;transform:none;pointer-events:auto;background:#0e1030ee;box-shadow:0 4px 18px #0006}
 @media (prefers-reduced-motion:reduce){.top{transition:none}}
 
-.xfollow{margin:22px auto 0;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:center;color:var(--muted);font-size:15px}
-.xfollow[hidden],footer [hidden]{display:none}
+.sns{margin:26px auto 0;text-align:center;color:var(--muted);font-size:15px}
+.sns-row{display:flex;flex-wrap:wrap;gap:10px 12px;justify-content:center;margin-top:10px}
+.sns-row .btn{min-width:150px;font-size:16px;padding:12px 22px;min-height:48px}
+.sns[hidden],.sns [hidden],footer [hidden]{display:none}

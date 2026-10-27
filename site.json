@@ -1,5 +1,22 @@
 {
- "_説明": "ここを1行直すだけで LP に出る。x_handle は @ なしの名前（例: lantern_chronicle）。app_store_url は App Store のページの URL。空のあいだは、そのボタンやリンクを出さない。",
- "x_handle": "",
- "app_store_url": ""
+ "_説明": "ここを直すだけで LP に出る。app_store_url は App Store のページの URL（空のあいだはボタンを出さない）。sns は公式アカウントのユーザー名（@ なし）。アカウントができたら、その行の live を true にすると「公式SNS」のリンクが出る。",
+ "app_store_url": "",
+ "sns": {
+  "x": {
+   "handle": "lanchroofficial",
+   "live": false
+  },
+  "tiktok": {
+   "handle": "lanchro_official",
+   "live": false
+  },
+  "instagram": {
+   "handle": "lanchro_official",
+   "live": false
+  },
+  "youtube": {
+   "handle": "lanchro_official",
+   "live": false
+  }
+ }
 }

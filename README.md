@@ -81,9 +81,9 @@ python3 tools/build_video.py
 - PC の灯台の層（`img/hero/wide/lighthouse.webp`）は、元の絵の光の帯にあったピンク色を金色に直した版。
 - PC では絵を切らずに見せ、キャッチコピーとボタンは絵の下の帯に置く。スマホは絵の下のほうに重ねる。
 
-## X のリンクと App Store のボタン（`site.json`）
+## 公式SNSのリンクと App Store のボタン（`site.json`）
 
-- `x_handle` に公式 X の名前（@ なし）を入れると、登録のところとフッターに「公式Xをフォロー」が出る。空のあいだは出ない。
+- `sns` に4つ（X・TikTok・Instagram・YouTube）のユーザー名（@ なし）が入っている。アカウントができたら、その行の `live` を `true` にすると、登録のところとフッターにリンクが出る。名前がその SNS の決まりに合わないとき（X は15字まで など）は出ない。
 - `app_store_url` に App Store のページの URL を入れると、いちばん上に「App Store で予約注文」のボタンが出る。
 - 共有したときに出る画像は `img/og.jpg`（1200×630）。
 
