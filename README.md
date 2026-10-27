@@ -1,7 +1,7 @@
 # ランタンクロニクル 事前登録サイト
 
 英単語RPG「ランタンクロニクル」の事前登録ページです。
-公開先: https://hey-show123.github.io/lantern-chronicle/
+公開先: https://lanternchronicle.com （Cloudflare から GitHub Pages の https://hey-show123.github.io/lantern-chronicle/ を出している。中身は同じ）
 お問い合わせ: hey_show.dev@outlook.jp
 
 ## 画面写真と動画の差し替え（いちばんよく使う）
