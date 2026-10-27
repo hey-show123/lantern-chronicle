@@ -1,0 +1,59 @@
+{
+  "_説明": "動画の切り貼り表。clip は tools/work/<名前>.mp4（capture.py が撮る）。start は録画の何秒目から、dur は何秒使うか。caption は下の帯の文字。",
+  "size": [
+    540,
+    1172
+  ],
+  "band": 128,
+  "font": "/System/Library/Fonts/ヒラギノ角ゴシック W7.ttc",
+  "cuts": [
+    {
+      "clip": "title",
+      "start": 0.5,
+      "dur": 4.0,
+      "caption": "英単語RPG ランタンクロニクル"
+    },
+    {
+      "clip": "home",
+      "start": 0.5,
+      "dur": 3.0,
+      "caption": "仲間といっしょに、冒険へ"
+    },
+    {
+      "clip": "battle",
+      "start": 5.0,
+      "dur": 3.6,
+      "caption": "英単語を見て、意味を4つから選ぶ"
+    },
+    {
+      "clip": "battle",
+      "start": 8.6,
+      "dur": 3.6,
+      "caption": "正解すると、仲間が攻撃！"
+    },
+    {
+      "clip": "battle",
+      "start": 13.3,
+      "dur": 2.8,
+      "caption": "勝って、ことばを覚える"
+    },
+    {
+      "clip": "gacha",
+      "start": 3.6,
+      "dur": 4.8,
+      "caption": "ガチャで、新しい仲間に出会う"
+    }
+  ],
+  "end": {
+    "image": "img/hero-sp.webp",
+    "dur": 3.4,
+    "badge": "事前登録 受付中！",
+    "title": "ことばを灯せ、冒険へ",
+    "sub": "2026年11月 配信予定 ／ 基本プレイ無料"
+  },
+  "out": {
+    "video": "img/promo.mp4",
+    "poster": "img/promo-poster.jpg",
+    "poster_at": 5.0
+  }
+}

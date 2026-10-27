@@ -1,0 +1,30 @@
+{
+ "tall": {
+  "lamp": [
+   48,
+   17.5
+  ],
+  "layers": [
+   {
+    "src": "img/hero/tall/sky.webp",
+    "depth": 0.02
+   },
+   {
+    "src": "img/hero/tall/lighthouse.webp",
+    "depth": 0.05
+   },
+   {
+    "src": "img/hero/tall/foreground.webp",
+    "depth": 0.14
+   },
+   {
+    "src": "img/hero/tall/characters.webp",
+    "depth": 0.09
+   },
+   {
+    "src": "img/hero/tall/logo.webp",
+    "depth": 0.03
+   }
+  ]
+ }
+}

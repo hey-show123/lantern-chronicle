@@ -40,7 +40,7 @@
  <span class="eyebrow">PLAY MOVIE</span><h2>25秒でわかる、ランタンクロニクル</h2>
  <p class="lead">実際のゲーム画面です。英単語を選ぶだけで、仲間が戦います。</p>
  <div class="shots movie">
-  <div class="phone reveal r-left"><video id="promo" muted loop playsinline preload="metadata" poster="img/promo-poster.jpg" aria-label="ランタンクロニクルのプレイ映像（約25秒）"><source src="img/promo.mp4" type="video/mp4"></video><button class="vbtn" id="vbtn" type="button" aria-label="再生・停止">▶</button></div>
+  <div class="vcard reveal r-left" data-slot="video"></div>
   <ul>
    <li><b>タイトル → ホーム</b><br>仲間たちが迎えてくれる、灯りの世界。</li>
    <li><b>ことばのバトル</b><br>意味を選ぶたび、コンボがつながって大ダメージ。</li>
@@ -99,14 +99,8 @@
 
 <section><div class="wrap">
  <span class="eyebrow">SCREEN</span><h2>ゲーム画面</h2>
- <div class="shots">
-  <div class="phone reveal"><img src="img/shot-title.webp" alt="ランタンクロニクルのタイトル画面（開発中の画面）" width="620" height="1347" loading="lazy"></div>
-  <ul>
-   <li><b>きょうの学習</b><br>毎日の短い学習で、コツコツ。</li>
-   <li><b>冒険・ストーリー</b><br>4択に正解するたび、物語が進みます。</li>
-   <li><b>図鑑・単語帳</b><br>出会った仲間と、覚えた単語をいつでも確認。</li>
-  </ul>
- </div>
+ <p class="lead">バトルを中心に、遊びの流れを見てみよう。（横にスクロール）</p>
+ <div class="shotrow" id="shotRow" tabindex="0" aria-label="ゲーム画面の一覧"></div>
  <p class="note">※開発中の画面です。実際の画面と異なる場合があります。</p>
 </div></section>
 
@@ -162,5 +156,6 @@
  <p>© 2026 ランタンクロニクル</p>
  <p style="margin-top:8px">App Store は Apple Inc. のサービスマークです。</p></footer>
 <script src="hero.js"></script>
+<script src="media.js"></script>
 <script src="app.js"></script>
 </body></html>

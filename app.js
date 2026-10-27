@@ -83,14 +83,4 @@
     document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
   } else document.querySelectorAll(".reveal").forEach((el) => el.classList.add("in"));
 
-  // promo video: plays muted while visible, tap toggles; with reduced motion it waits for a tap
-  const vid = document.getElementById("promo"), vbtn = document.getElementById("vbtn");
-  if (vid) {
-    const box = vid.parentElement, still = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const sync = () => { box.classList.toggle("paused", vid.paused); vbtn.textContent = vid.paused ? "▶" : "❚❚"; };
-    vid.addEventListener("play", sync); vid.addEventListener("pause", sync); sync();
-    box.addEventListener("click", () => (vid.paused ? vid.play() : vid.pause()));
-    if (!still && "IntersectionObserver" in window)
-      new IntersectionObserver((es) => es.forEach((e) => (e.isIntersecting ? vid.play().catch(() => {}) : vid.pause())), { threshold: 0.5 }).observe(vid);
-  }
 })();

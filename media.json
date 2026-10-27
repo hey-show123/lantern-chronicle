@@ -1,0 +1,65 @@
+{
+ "phone": {
+  "frame": "img/phone-frame.webp",
+  "ratio": [
+   660,
+   1377
+  ],
+  "screen": {
+   "left": 3.64,
+   "top": 1.74,
+   "width": 92.73,
+   "height": 96.51
+  }
+ },
+ "video": {
+  "file": "img/promo.mp4",
+  "poster": "img/promo-poster.jpg",
+  "alt": "ランタンクロニクルのプレイ映像（約25秒）",
+  "caption": "実際のゲーム画面です。"
+ },
+ "shots": [
+  {
+   "slot": "battle",
+   "file": "img/shots/battle.webp",
+   "title": "ことばのバトル",
+   "caption": "意味を選ぶたび、コンボがつながります。",
+   "alt": "バトル画面。落ちてくる英単語の意味を選ぶ"
+  },
+  {
+   "slot": "result",
+   "file": "img/shots/result.webp",
+   "title": "勝利！",
+   "caption": "覚えた単語がひと目でわかります。",
+   "alt": "バトルの勝利画面"
+  },
+  {
+   "slot": "title",
+   "file": "img/shots/title.webp",
+   "title": "タイトル",
+   "caption": "仲間たちが迎えてくれます。",
+   "alt": "タイトル画面"
+  },
+  {
+   "slot": "home",
+   "file": "img/shots/home.webp",
+   "title": "ホーム",
+   "caption": "冒険・ミッション・対戦へ。",
+   "alt": "ホーム画面"
+  },
+  {
+   "slot": "party",
+   "file": "img/shots/party.webp",
+   "title": "編成",
+   "caption": "仲間を選んで、パーティを作ります。",
+   "alt": "編成画面"
+  },
+  {
+   "slot": "gacha",
+   "file": "img/shots/gacha.webp",
+   "title": "ガチャ",
+   "caption": "ランタンのひもを引いて、仲間に出会う。",
+   "alt": "ガチャ画面"
+  }
+ ]
+}

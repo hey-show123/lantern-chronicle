@@ -1,0 +1,229 @@
+{
+  "_説明": "シミュレータで撮る内容。steps は上から順に実行する。画面が変わったら、ここの言葉（ボタンの表示名）を直す。",
+  "udid": "465F09DC-1475-4AB6-92FA-9299110E4E54",
+  "bundle": "com.projectlantern.mobile",
+  "shots": [
+    {
+      "name": "title",
+      "steps": [
+        {
+          "relaunch": true
+        },
+        {
+          "wait": 11
+        },
+        {
+          "shot": "title"
+        }
+      ]
+    },
+    {
+      "name": "home",
+      "steps": [
+        {
+          "home": true
+        },
+        {
+          "wait": 2
+        },
+        {
+          "shot": "home"
+        }
+      ]
+    },
+    {
+      "name": "party",
+      "steps": [
+        {
+          "home": true
+        },
+        {
+          "tap": "編成"
+        },
+        {
+          "wait": 2.5
+        },
+        {
+          "shot": "party"
+        }
+      ]
+    },
+    {
+      "name": "gacha",
+      "steps": [
+        {
+          "home": true
+        },
+        {
+          "tap": "ガチャ"
+        },
+        {
+          "wait": 3
+        },
+        {
+          "shot": "gacha"
+        }
+      ]
+    },
+    {
+      "name": "battle",
+      "steps": [
+        {
+          "home": true
+        },
+        {
+          "stamina_ok": true
+        },
+        {
+          "goto_stage": [
+            "冒険、",
+            "ストーリー、",
+            "序章",
+            "ステージ2"
+          ]
+        },
+        {
+          "tap": "出撃"
+        },
+        {
+          "wait": 3
+        },
+        {
+          "battle": {
+            "seconds": 120,
+            "wrong_every": 0,
+            "shots": [
+              {
+                "t": 4,
+                "name": "battle"
+              }
+            ]
+          }
+        },
+        {
+          "wait": 2.5
+        },
+        {
+          "shot": "result"
+        }
+      ]
+    }
+  ],
+  "clips": [
+    {
+      "name": "title",
+      "steps": [
+        {
+          "relaunch": true
+        },
+        {
+          "wait": 9
+        },
+        {
+          "_record_from_here": true
+        },
+        {
+          "wait": 5
+        }
+      ]
+    },
+    {
+      "name": "home",
+      "steps": [
+        {
+          "home": true
+        },
+        {
+          "wait": 1.5
+        },
+        {
+          "_record_from_here": true
+        },
+        {
+          "wait": 4
+        }
+      ]
+    },
+    {
+      "name": "battle",
+      "steps": [
+        {
+          "home": true
+        },
+        {
+          "stamina_ok": true
+        },
+        {
+          "goto_stage": [
+            "冒険、",
+            "ストーリー、",
+            "序章",
+            "ステージ2"
+          ]
+        },
+        {
+          "_record_from_here": true
+        },
+        {
+          "tap": "出撃"
+        },
+        {
+          "wait": 3
+        },
+        {
+          "battle": {
+            "seconds": 120,
+            "wrong_every": 0
+          }
+        },
+        {
+          "wait": 3
+        }
+      ]
+    },
+    {
+      "name": "gacha",
+      "steps": [
+        {
+          "home": true
+        },
+        {
+          "tap": "ガチャ"
+        },
+        {
+          "wait": 3
+        },
+        {
+          "tap_if": "1回引く"
+        },
+        {
+          "wait": 1
+        },
+        {
+          "tap_if": "引く"
+        },
+        {
+          "wait": 3
+        },
+        {
+          "_record_from_here": true
+        },
+        {
+          "wait": 1.5
+        },
+        {
+          "swipe": [
+            220,
+            640,
+            220,
+            840,
+            0.6
+          ]
+        },
+        {
+          "wait": 4
+        }
+      ]
+    }
+  ]
+}
