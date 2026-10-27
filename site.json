@@ -3,19 +3,19 @@
  "app_store_url": "",
  "sns": {
   "x": {
-   "handle": "lanchroofficial",
+   "handle": "lanchro_info",
    "live": false
   },
   "tiktok": {
-   "handle": "lanchro_official",
+   "handle": "lanchro_info",
    "live": false
   },
   "instagram": {
-   "handle": "lanchro_official",
+   "handle": "lanchro_info",
    "live": false
   },
   "youtube": {
-   "handle": "lanchro_official",
+   "handle": "lanchro_info",
    "live": false
   }
  }
