@@ -26,11 +26,13 @@ python3 tools/capture.py --app-repo /Volumes/HD-ADU3/モチタンクローン --
 ```
 
 やること:
-1. シミュレータ「Lantern iPhone 17 Pro Max」を起こす（新しい端末は作らない）。
+1. シミュレータ「Lantern iPhone 17 Pro Max」を使う（新しい端末は作らない）。使っているあいだは `~/lantern-tools/sim-lock-iphone` に名前を書き、ほかの作業が使っていたら止まる。
 2. `tools/capture.json` の手順どおりに画面を動かし、`img/shots/*.webp` を撮る。
 3. 同じく録画のクリップを `tools/work/*.mp4` に撮る（このフォルダは git に入れない）。
 4. `--build` があれば `tools/build_video.py` が `tools/cuts.json` を読み、`img/promo.mp4` とポスター画像を作る。
 5. シミュレータは起動したままにする（2台とも起動したままにする決まり。止めたいときだけ `--shutdown`）。
+
+ほかの手順ファイルで撮る（例: TikTok 用。アプリのリポジトリの `output/tiktok/capture_tiktok.json`）: `--config <手順のファイル> --work <録画の置き場>` を足す。
 
 一部だけ撮り直す:
 
