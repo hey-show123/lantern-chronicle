@@ -68,7 +68,7 @@ python3 tools/build_video.py
 
 - `cuts` は使う場面の表。`clip` はクリップ名、`start` は録画の何秒目から、`dur` は何秒使うか、`caption` は下の帯の文字。
 - 録画を撮り直したら、場面の秒数がずれるので、`tools/work/*.mp4` を見て `start` を合わせる。
-- 最後の案内画面は `end`（背景の絵・文字）。
+- 最後の案内画面は `end`（背景の絵・文字）。文字だけ変えたいときは、撮り直さずに `python3 tools/build_video.py --end-only` で案内画面だけ作り直せる。
 
 ## ヒーロー（いちばん上の絵）
 
