@@ -74,6 +74,11 @@
     btn.disabled = false;
   });
 
+  // header: hidden over the hero art, shown once the art has scrolled half away
+  const top = document.querySelector(".top"), heroEl = document.querySelector(".hero");
+  const onScroll = () => top.classList.toggle("show", scrollY > (heroEl ? heroEl.offsetHeight * 0.5 : 300));
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
   // reveal variants: groups come in one by one
   document.querySelectorAll(".steps,.feats,.rewards").forEach((g) => [...g.children].forEach((c, i) => { c.style.setProperty("--d", i * 0.08 + "s"); c.classList.add("reveal", "r-pop"); }));
   document.querySelectorAll(".shots .phone").forEach((c) => c.classList.add("r-left"));

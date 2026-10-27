@@ -74,7 +74,9 @@ python3 tools/build_video.py
 
 - `img/hero/layers.json` に層の絵と、動く量（`depth`）、灯台の光の位置（`lamp`、%）を書く。
 - `tall` はスマホ、`wide` は PC。`wide` が無いあいだは、PC は1枚絵（`img/hero-wide.webp`）で動く。
-- 層の元の絵: アプリのリポジトリ `design/concepts/lp/title-layers/`。
+- 層の元の絵: アプリのリポジトリ `design/concepts/lp/title-layers/`（スマホ）と `title-layers/wide/`（PC）。
+- PC の灯台の層（`img/hero/wide/lighthouse.webp`）は、元の絵の光の帯にあったピンク色を金色に直した版。
+- PC では絵を切らずに見せ、キャッチコピーとボタンは絵の下の帯に置く。スマホは絵の下のほうに重ねる。
 
 ## 事前登録の受け口
 

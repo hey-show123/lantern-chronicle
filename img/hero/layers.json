@@ -26,5 +26,33 @@
     "depth": 0.03
    }
   ]
+ },
+ "wide": {
+  "lamp": [
+   72,
+   6.5
+  ],
+  "layers": [
+   {
+    "src": "img/hero/wide/sky.webp",
+    "depth": 0.02
+   },
+   {
+    "src": "img/hero/wide/lighthouse.webp",
+    "depth": 0.05
+   },
+   {
+    "src": "img/hero/wide/foreground.webp",
+    "depth": 0.14
+   },
+   {
+    "src": "img/hero/wide/characters.webp",
+    "depth": 0.09
+   },
+   {
+    "src": "img/hero/wide/logo.webp",
+    "depth": 0.03
+   }
+  ]
  }
 }

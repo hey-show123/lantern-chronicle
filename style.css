@@ -24,7 +24,7 @@ a{color:var(--gold2)}
 .stage{position:absolute;inset:0;overflow:hidden;z-index:-2;background:#0e1030}
 .art{position:absolute;left:0;top:0;width:100%;height:100%;will-change:transform}
 .art picture,.art picture img{position:absolute;inset:0;width:100%;height:100% !important;object-fit:cover;display:block}
-.art .layer{position:absolute;inset:-4%;width:108%;height:108% !important;object-fit:cover;will-change:transform;pointer-events:none}
+.art .layer{position:absolute;left:-2%;top:-2%;width:104%;height:104% !important;max-width:none;object-fit:cover;will-change:transform;pointer-events:none}
 #fx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen}
 .lamp{position:absolute;width:0;height:0;pointer-events:none;mix-blend-mode:screen}
 .lamp .glow{position:absolute;left:-14vmin;top:-14vmin;width:28vmin;height:28vmin;border-radius:50%;background:radial-gradient(circle,#fff3b8dd 0,#ffd36a66 28%,#ffb62900 68%);animation:lampPulse 3.6s ease-in-out infinite}
@@ -53,7 +53,7 @@ section>.wrap{position:relative;z-index:1}
 section{padding:clamp(56px,9vw,104px) 0;position:relative}
 section.alt{background:var(--ink2)}
 .eyebrow{display:block;text-align:center;color:var(--gold);font-size:13px;letter-spacing:.3em;font-family:"Mochiy Pop One",sans-serif}
-h2,.lead,.tag{text-wrap:balance;word-break:auto-phrase}
+h2,.lead,.tag,.sub{text-wrap:balance;word-break:auto-phrase}
 h2{font-size:clamp(26px,4.6vw,42px);text-align:center;margin:6px 0 14px;line-height:1.35}
 .lead{text-align:center;max-width:640px;margin:0 auto 36px;color:var(--muted)}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:28px}
@@ -169,3 +169,21 @@ footer nav{display:flex;flex-wrap:wrap;gap:6px 18px;justify-content:center;margi
 .shot .frame{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .shot figcaption{margin-top:12px;font-size:14px;color:var(--muted)}
 .shot figcaption b{display:block;color:var(--gold2);font-family:"Mochiy Pop One",sans-serif;font-weight:400;font-size:16px}
+
+/* PC: the art stays whole; the copy sits in a strip under it (the cast fills the picture) */
+@media (min-width:821px){
+ .hero{display:block;min-height:0;padding:0!important}
+ .hero::after{display:none}
+ .stage{position:relative;inset:auto;z-index:0;height:clamp(420px,min(56.25vw,calc(100svh - 104px)),1200px)}
+ .stage::after{content:"";position:absolute;left:0;right:0;bottom:0;height:16%;background:linear-gradient(180deg,#0e103000,var(--ink));pointer-events:none;z-index:3}
+ .hero .copy{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:2px 28px;padding:14px 0 18px;width:min(1080px,100% - 32px)}
+ .hero .copy .badge{grid-row:1/3}
+ .hero .copy .tag{margin:0;font-size:clamp(24px,2.4vw,32px);grid-column:2;text-shadow:none}
+ .hero .copy .sub{margin:0;grid-column:2;text-shadow:none;color:var(--muted);font-size:14px}
+ .hero .copy .cta-row{grid-column:3;grid-row:1/3}
+}
+
+/* the header waits until the hero art (which carries the logo) has scrolled away */
+.top{transition:opacity .3s,transform .3s,background .3s;opacity:0;transform:translateY(-110%);pointer-events:none}
+.top.show{opacity:1;transform:none;pointer-events:auto;background:#0e1030ee;box-shadow:0 4px 18px #0006}
+@media (prefers-reduced-motion:reduce){.top{transition:none}}

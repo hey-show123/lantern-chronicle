@@ -90,7 +90,7 @@
   const art = document.getElementById("art"), pic = document.getElementById("heroPic"), lamp = document.getElementById("lamp");
   const mq = matchMedia("(max-width:820px)");
   const MODES = {
-    wide: { a: 16 / 9, fx: 0.35, fy: 0.5, lamp: [30, 37] },
+    wide: { a: 16 / 9, fx: 0.5, fy: 0.25, lamp: [72, 6.5] },
     tall: { a: 760 / 1351, fx: 0.5, fy: 0, lamp: [61, 17] },
   };
   let mode = mq.matches ? "tall" : "wide", layers = [], cfg = null;
