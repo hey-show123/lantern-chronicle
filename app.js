@@ -1,6 +1,6 @@
 (() => {
   const API = "https://mxebwsikgdhzcfcwtljc.supabase.co/functions/v1/prereg";
-  const TIERS = [100, 300, 500, 1000, 3000];
+  const TIERS = [100, 300, 500, 1000, 3000, 5000, 10000];
   const $ = (id) => document.getElementById(id);
 
   // site.json: the App Store button and the official X links appear only once their values are set

@@ -84,13 +84,14 @@ h2{font-size:clamp(26px,4.6vw,42px);text-align:center;margin:6px 0 14px;line-hei
 .shots ul{list-style:none;display:grid;gap:12px}
 .shots li{background:var(--panel);border-radius:16px;padding:14px 18px;border-left:6px solid var(--gold)}
 /* rewards */
-.rewards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:8px}
+.rewards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:8px}
 .rw{background:linear-gradient(180deg,#2a2f80,#171a4a);border:3px solid #ffc94a55;border-radius:var(--radius);padding:18px 10px 16px;text-align:center;position:relative;transition:.3s}
 .rw .p{font-family:"Mochiy Pop One",sans-serif;font-size:clamp(20px,2.6vw,26px);color:var(--gold)}
 .rw .p small{font-size:13px;color:var(--text)}
 .rw img{width:64px;height:64px;margin:8px auto;object-fit:contain}
 .rw .t{font-size:14px;line-height:1.5}
 .rw .st{margin-top:8px;font-size:12px;color:var(--muted)}
+.rw .pz{margin:10px auto 0;display:inline-block;font-size:12px;line-height:1.4;color:var(--gold2);border:1px solid #ffc94a88;border-radius:99px;padding:3px 10px}
 .rw.done{border-color:var(--gold);box-shadow:0 0 28px #ffc94a88;background:linear-gradient(180deg,#5a4aa0,#2a2f80)}
 .rw.done .st{color:var(--gold2)}
 .rw.cur{border-color:var(--teal)}
