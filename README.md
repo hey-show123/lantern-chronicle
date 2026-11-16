@@ -92,3 +92,8 @@ python3 tools/build_video.py
 - Supabase の Edge Function `prereg`（コードはアプリのリポジトリ `infra/prereg/`）。
 - 確認メール（二重確認）は、送信の鍵を入れると有効になる（`output/lp/PREREG_BACKEND.md`）。
 
+
+
+## 応募規約ページ
+
+`contest.html`（X の「ことば当てチャレンジ」の規約）。日付は表の中に直接書いてある。公開日 L が動いたら、表の日付（第1〜3回・ゲージ賞・12月17日の人数確定）と「最終更新」を直す。元の文は `project-lantern` の `docs/marketing/giveaway/RULES_DRAFT.md`。
