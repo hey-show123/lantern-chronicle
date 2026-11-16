@@ -4,7 +4,9 @@
   const $ = (id) => document.getElementById(id);
 
   // site.json: the App Store button and the official X links appear only once their values are set
+  let BETA_URL = "";
   fetch("site.json", { cache: "no-cache" }).then((r) => r.json()).then((s) => {
+    if (s.beta_url) { BETA_URL = s.beta_url; const b = $("beta"); if (b) b.hidden = false; }
     if (s.app_store_url) {
       const a = document.createElement("a");
       a.className = "btn ghost"; a.href = s.app_store_url; a.textContent = "App Store で予約注文";
@@ -81,6 +83,14 @@
           ? "確認メールを送りました。メール内のリンクを開くと登録が完了します（届かないときは迷惑メールもご確認ください）。"
           : "登録しました。配信の日にお知らせします。ありがとうございます！";
         form.reset();
+        if (BETA_URL) {
+          // public beta (TestFlight): the join link appears right after the pre-registration
+          const wrap = document.createElement("p"); wrap.style.marginTop = "14px";
+          const link = document.createElement("a");
+          link.className = "btn"; link.href = BETA_URL; link.target = "_blank"; link.rel = "noopener";
+          link.textContent = "βテスターに参加する（TestFlight）";
+          wrap.appendChild(link); msg.appendChild(wrap);
+        }
         if (d.mode !== "double") fetch(API + "/count").then((x) => x.json()).then((c) => paint(c.count || 0)).catch(() => {});
       } else {
         msg.className = "msg err";
